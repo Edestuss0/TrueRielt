@@ -180,6 +180,16 @@ export function AddObjectPage() {
                 multiple
                 onChange={handleImageChange}
             />
+            <div style={{ display: "flex", gap: 10, marginTop: 10 }}>
+                {images.map((img, i) => (
+                    <img
+                        key={i}
+                        src={img}
+                        alt=""
+                        width={100}
+                    />
+                ))}
+            </div>
             <button onClick={resetForm}>Reset</button>
             <button onClick={handleSubmit}>Add Object</button>
         </>
