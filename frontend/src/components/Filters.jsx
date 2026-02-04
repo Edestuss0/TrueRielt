@@ -23,82 +23,117 @@ export function Filters({ Submit, rooms, setRooms, areaMax, setAreaMax, areaMin,
     }
     
     return (
-        <div style={{ display: (show === false ? "none" : "block") }}>
-            <label>Rooms</label>
-            <input
-                onChange={e => setRooms(e.target.value)}
-                value={rooms}
-                type="number"
-            />
-            <label>Price Min</label>
-            <input 
-                type="number"
-                value={costMin}
-                onChange={e => setCostMin(e.target.value)}
-            />
-            <label>Price Max</label>
-            <input
-                type="number"
-                value={costMax}
-                onChange={e => setCostMax(e.target.value)}
-            />
-            <label>District</label>
-            <select onChange={e => setDistrict(e.target.value)}>
-                <option value="none">Не выбран</option>
-                <option value="centr">Центр</option>
-                <option value="zapad">Запад</option>
-            </select>
-            <label>Area Max</label>
-            <input
-                onChange={e => setAreaMax(e.target.value)}
-                value={areaMax}
-                type="number"
-            />
-            <label>Area Min</label>
-            <input
-                onChange={e => setAreaMin(e.target.value)}
-                value={areaMin}
-                type="number"
-            />
-            <label>Living Area Max</label>
-            <input
-                onChange={e => setLivingMax(e.target.value)}
-                value={livingMax}
-                type="number"
-            />
-            <label>Living Area Min</label>
-            <input
-                onChange={e => setLivingMin(e.target.value)}
-                value={livingMin}
-                type="number"
-            />
-            <label>Kitchen Area Max</label>
-            <input
-                onChange={e => setKitchenMax(e.target.value)}
-                value={KitchenMax}
-                type="number"
-            />
-            <label>Kitchen Area Min</label>
-            <input
-                onChange={e => setKitchenMin(e.target.value)}
-                value={kitchenMin}
-                type="number"
-            />
-            <label>Min Floor</label>
-            <input 
-                type="number"
-                value={floorMin}
-                onChange={e => setFloorMin(e.target.value)}
-            />
-            <label>Max Floor</label>
-            <input
-                type="number"
-                value={floorMax}
-                onChange={e => setFloorMax(e.target.value)}
-            />
+        <div className="filters-panel" style={{ display: (show === false ? "none" : "block") }}>
+            <h2>Filters</h2>
             
-            <button onClick={ResetFilters}>Reset Filters</button>
-            <button onClick={Submit}>Submit</button>
+            <div className="filter-group">
+                <label>Rooms</label>
+                <input
+                    onChange={e => setRooms(e.target.value)}
+                    value={rooms}
+                    type="number"
+                    placeholder="Number of rooms"
+                />
+            </div>
+            
+            <div className="filter-group">
+                <label>District</label>
+                <select onChange={e => setDistrict(e.target.value)} value={district}>
+                    <option value="none">All</option>
+                    <option value="centr">Center</option>
+                    <option value="zapad">West</option>
+                </select>
+            </div>
+            
+            <div className="filter-group">
+                <label>Price Range</label>
+                <input 
+                    type="number"
+                    value={costMin}
+                    onChange={e => setCostMin(e.target.value)}
+                    placeholder="Min price"
+                />
+                <input
+                    type="number"
+                    value={costMax}
+                    onChange={e => setCostMax(e.target.value)}
+                    placeholder="Max price"
+                    style={{marginTop: '0.5rem'}}
+                />
+            </div>
+            
+            <div className="filter-group">
+                <label>Total Area (m²)</label>
+                <input
+                    onChange={e => setAreaMin(e.target.value)}
+                    value={areaMin}
+                    type="number"
+                    placeholder="Min area"
+                />
+                <input
+                    onChange={e => setAreaMax(e.target.value)}
+                    value={areaMax}
+                    type="number"
+                    placeholder="Max area"
+                    style={{marginTop: '0.5rem'}}
+                />
+            </div>
+            
+            <div className="filter-group">
+                <label>Living Area (m²)</label>
+                <input
+                    onChange={e => setLivingMin(e.target.value)}
+                    value={livingMin}
+                    type="number"
+                    placeholder="Min area"
+                />
+                <input
+                    onChange={e => setLivingMax(e.target.value)}
+                    value={livingMax}
+                    type="number"
+                    placeholder="Max area"
+                    style={{marginTop: '0.5rem'}}
+                />
+            </div>
+            
+            <div className="filter-group">
+                <label>Kitchen Area (m²)</label>
+                <input
+                    onChange={e => setKitchenMin(e.target.value)}
+                    value={kitchenMin}
+                    type="number"
+                    placeholder="Min area"
+                />
+                <input
+                    onChange={e => setKitchenMax(e.target.value)}
+                    value={KitchenMax}
+                    type="number"
+                    placeholder="Max area"
+                    style={{marginTop: '0.5rem'}}
+                />
+            </div>
+            
+            <div className="filter-group">
+                <label>Floor Range</label>
+                <input 
+                    type="number"
+                    value={floorMin}
+                    onChange={e => setFloorMin(e.target.value)}
+                    placeholder="Min floor"
+                />
+                <input
+                    type="number"
+                    value={floorMax}
+                    onChange={e => setFloorMax(e.target.value)}
+                    placeholder="Max floor"
+                    style={{marginTop: '0.5rem'}}
+                />
+            </div>
+            
+            <div className="filter-buttons">
+                <button onClick={Submit}>Apply Filters</button>
+                <button onClick={ResetFilters} className="reset">Reset All</button>
+            </div>
         </div>
     )
 }

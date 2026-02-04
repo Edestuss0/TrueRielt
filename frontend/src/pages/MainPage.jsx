@@ -18,7 +18,7 @@ export function MainPage() {
     const [kitchenAreaMax, setKitchenAreaMax] = useState(0)
     const [kitchenAreaMin, setKitchenAreaMin] = useState(0)
     const [filteredObjects, setFilteredObjects] = useState([])
-    const [show, setShow] = useState(false)
+    const [show, setShow] = useState(true)
     
     
     // Подгрузка обьектов с сервера
@@ -35,9 +35,11 @@ export function MainPage() {
     // Начальный показ всех обьектов
     useEffect(() => {
         setFilteredObjects(Objects)
-    }, [])
-    
-    
+        console.log(2)
+    }, [Objects])
+    const [, set] = useState();
+
+
     // Скрыть/Показать фильтры
     function ShowFilters()  {
         if (show === true) {
@@ -67,56 +69,61 @@ export function MainPage() {
     
     
     
+    
     return (
         <>
-            <button onClick={ShowFilters}>{show === false ? "Show Filters" : "Hide Filters"}</button>
-            <Filters 
-                rooms={rooms} 
-                setRooms={setRooms} 
-                areaMax={areaMax} 
-                setAreaMax={setAreaMax} 
-                areaMin={areaMin} 
-                setAreaMin={setAreaMin}
-                district={district}
-                setDistrict={setDistrict}
-                floorMin={floorMin}
-                floorMax={floorMax}
-                setFloorMin={setFloorMin}
-                setFloorMax={setFloorMax}
-                livingMin={livingAreaMin}
-                setLivingMin={setLivingAreaMin}
-                livingMax={livingAreaMax}
-                setLivingMax={setLivingAreaMax}
-                kitchenMin={kitchenAreaMin}
-                setKitchenMin={setKitchenAreaMin}
-                KitchenMax={kitchenAreaMax}
-                setKitchenMax={setKitchenAreaMax}
-                costMin={priceMin}
-                costMax={priceMax}
-                setCostMax={setPriceMax}
-                setCostMin={setPriceMin}
-                
-                Submit={SubmitFilters}
-                show={show}
-            />
+            <div className="app-header">
+                <h1>🏠 RealEstate</h1>
+                <div className="nav-buttons">
+                    <a href="/add" style={{display: 'inline-block', width: '100%'}}>
+                        <button style={{width: '100%', margin: 0}}>+ Add Object</button>
+                    </a>
+                </div>
+            </div>
             
-            <ul>
-                {/*{Objects.map(obj => (*/}
-                {/*    <ObjectCard */}
-                {/*        key={obj.id} */}
-                {/*        item={obj}*/}
-                {/*    />*/}
-                {/*    */}
-                {/*))}*/}
-                
-                {filteredObjects.map(obj => (
-                    <ObjectCard
-                        key={obj.id}
-                        item={obj}
+            <div className="main-container">
+                <div className="content-wrapper">
+                    <Filters 
+                        rooms={rooms} 
+                        setRooms={setRooms} 
+                        areaMax={areaMax} 
+                        setAreaMax={setAreaMax} 
+                        areaMin={areaMin} 
+                        setAreaMin={setAreaMin}
+                        district={district}
+                        setDistrict={setDistrict}
+                        floorMin={floorMin}
+                        floorMax={floorMax}
+                        setFloorMin={setFloorMin}
+                        setFloorMax={setFloorMax}
+                        livingMin={livingAreaMin}
+                        setLivingMin={setLivingAreaMin}
+                        livingMax={livingAreaMax}
+                        setLivingMax={setLivingAreaMax}
+                        kitchenMin={kitchenAreaMin}
+                        setKitchenMin={setKitchenAreaMin}
+                        KitchenMax={kitchenAreaMax}
+                        setKitchenMax={setKitchenAreaMax}
+                        costMin={priceMin}
+                        costMax={priceMax}
+                        setCostMax={setPriceMax}
+                        setCostMin={setPriceMin}
+                        Submit={SubmitFilters}
+                        show={show}
                     />
-
-                ))}
-            </ul>
+                    
+                    <div className="objects-container">
+                        <ul className="objects-list">
+                            {filteredObjects.map(obj => (
+                                <ObjectCard
+                                    key={obj.id}
+                                    item={obj}
+                                />
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </>
     )
 }

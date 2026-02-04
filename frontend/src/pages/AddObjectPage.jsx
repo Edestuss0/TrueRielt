@@ -12,7 +12,7 @@ export function AddObjectPage() {
     const [kitchen, setKitchen] = useState(0);
     const [floor, setFloor] = useState(0);
     const [totalFloors, setTotalFloors] = useState(0);
-    const [district, setDistrict] = useState(0);
+    const [district, setDistrict] = useState("");
     const [address, setAddress] = useState("");
     const [cost, setCost] = useState(0);
     const [title, setTitle] = useState("");
@@ -39,6 +39,10 @@ export function AddObjectPage() {
         );
 
         setImages(base64Images);
+    };
+    
+    const removeImage = (index) => {
+        setImages(images.filter((_, i) => i !== index));
     };
     
     const resetForm = async () => {
@@ -106,92 +110,160 @@ export function AddObjectPage() {
 
     return (
         <>
-            <label>Address</label>
-            <input
-                type="text" 
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-            />
-            <label>Rooms</label>
-            <select onChange={(e) => setRooms(e.target.value)}>
-                <option value="-1">Non select</option>
-                <option value="0">Studio</option>
-                <option value="1">1 Room</option>
-                <option value="2">2 Rooms</option>
-                <option value="3">3 Rooms</option>
-                <option value="4">4 Rooms</option>
-            </select>
-            <label>Area</label>
-            <input 
-                type="text"
-                value={area}
-                onChange={(e) => {setArea(e.target.value)}}
-            />
-            <label>Price</label>
-            <input
-                type={"text"}
-                value={cost}
-                onChange={(e) => {setCost(e.target.value)}}
-            />
-            <label>District</label>
-            <select onChange={(e) => setDistrict(e.target.value)}>
-                <option value="centr">Center</option>
-                <option value="zapad">West</option>
-            </select>
-            <label>Living Area</label>
-            <input
-                type="text"
-                value={living}
-                onChange={(e) => {setLiving(e.target.value)}}           
-            />
-            <label>Kitchen Area</label>
-            <input 
-                type="text"
-                value={kitchen}
-                onChange={(e) => {setKitchen(e.target.value)}}
-            />
-            <label>Floor</label>
-            <input 
-                type="text"
-                value={floor}
-                onChange={(e) => {setFloor(e.target.value)}}
-            />
-            <label>Total Floors</label>
-            <input 
-                type="text"
-                value={totalFloors}
-                onChange={(e) => {setTotalFloors(e.target.value)}}
-            />
-            <label>Title</label>
-            <input 
-                type="text"
-                value={title}
-                onChange={(e) => {setTitle(e.target.value)}}
-            />
-            <label>Description</label>
-            <textarea 
-                value={description}
-                onChange={(e) => {setDescription(e.target.value)}}
-            />
-            <label>Images</label>
-            <input
-                type="file"
-                accept="image/*"
-                multiple
-                onChange={handleImageChange}
-            />
-            <div style={{ display: "flex", gap: 10, marginTop: 10 }}>
-                {images.map((img, i) => (
-                    <img
-                        key={i}
-                        src={img}
-                        alt=""
-                        width={100}
-                    />
-                ))}
+            <div className="app-header">
+                <h1>➕ Add New Property</h1>
+                <div className="nav-buttons">
+                    <a href="/" style={{display: 'inline-block', width: '100%'}}>
+                        <button style={{width: '100%', margin: 0}}>← Back to Listings</button>
+                    </a>
+                </div>
             </div>
-            <button onClick={resetForm}>Reset</button>
-            <button onClick={handleSubmit}>Add Object</button>
+            
+            <div className="add-object-container">
+                <div className="form-grid full">
+                    <div className="form-group full-width">
+                        <label>Property Title *</label>
+                        <input 
+                            type="text" 
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            placeholder="e.g., Beautiful 2-room apartment in the center"
+                        />
+                    </div>
+                    
+                    <div className="form-group full-width">
+                        <label>Address *</label>
+                        <input
+                            type="text" 
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
+                            placeholder="Enter full address"
+                        />
+                    </div>
+                    
+                    <div className="form-group">
+                        <label>Rooms *</label>
+                        <select onChange={(e) => setRooms(e.target.value)} value={rooms}>
+                            <option value="-1">Select...</option>
+                            <option value="0">Studio</option>
+                            <option value="1">1 Room</option>
+                            <option value="2">2 Rooms</option>
+                            <option value="3">3 Rooms</option>
+                            <option value="4">4 Rooms</option>
+                        </select>
+                    </div>
+                    
+                    <div className="form-group">
+                        <label>District *</label>
+                        <select onChange={(e) => setDistrict(e.target.value)} value={district}>
+                            <option value="">Select...</option>
+                            <option value="centr">Center</option>
+                            <option value="zapad">West</option>
+                        </select>
+                    </div>
+                    
+                    <div className="form-group">
+                        <label>Total Area (m²) *</label>
+                        <input 
+                            type="text"
+                            value={area}
+                            onChange={(e) => {setArea(e.target.value)}}
+                            placeholder="0"
+                        />
+                    </div>
+                    
+                    <div className="form-group">
+                        <label>Living Area (m²) *</label>
+                        <input
+                            type="text"
+                            value={living}
+                            onChange={(e) => {setLiving(e.target.value)}}
+                            placeholder="0"
+                        />
+                    </div>
+                    
+                    <div className="form-group">
+                        <label>Kitchen Area (m²) *</label>
+                        <input 
+                            type="text"
+                            value={kitchen}
+                            onChange={(e) => {setKitchen(e.target.value)}}
+                            placeholder="0"
+                        />
+                    </div>
+                    
+                    <div className="form-group">
+                        <label>Price ($) *</label>
+                        <input
+                            type={"text"}
+                            value={cost}
+                            onChange={(e) => {setCost(e.target.value)}}
+                            placeholder="0"
+                        />
+                    </div>
+                    
+                    <div className="form-group">
+                        <label>Floor *</label>
+                        <input 
+                            type="text"
+                            value={floor}
+                            onChange={(e) => {setFloor(e.target.value)}}
+                            placeholder="0"
+                        />
+                    </div>
+                    
+                    <div className="form-group">
+                        <label>Total Floors *</label>
+                        <input 
+                            type="text"
+                            value={totalFloors}
+                            onChange={(e) => {setTotalFloors(e.target.value)}}
+                            placeholder="0"
+                        />
+                    </div>
+                    
+                    <div className="form-group full-width">
+                        <label>Description *</label>
+                        <textarea 
+                            value={description}
+                            onChange={(e) => {setDescription(e.target.value)}}
+                            placeholder="Describe the property..."
+                        />
+                    </div>
+                    
+                    <div className="image-upload-section">
+                        <label className="image-upload-label" htmlFor="image-input">
+                            📷 Select Images
+                        </label>
+                        <input
+                            id="image-input"
+                            type="file"
+                            accept="image/*"
+                            multiple
+                            onChange={handleImageChange}
+                        />
+                        <p style={{marginBottom: 0, color: 'var(--text-secondary)', fontSize: '0.9em'}}>
+                            Select one or more images for your property
+                        </p>
+                    </div>
+                    
+                    {images.length > 0 && (
+                        <div className="image-preview-container">
+                            {images.map((img, i) => (
+                                <div key={i} className="image-preview-item">
+                                    <img src={img} alt={`Preview ${i + 1}`} />
+                                    <button type="button" className="image-remove-btn" onClick={() => removeImage(i)}>✕</button>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                    
+                    <div className="form-buttons">
+                        <button onClick={resetForm} className="reset">Reset Form</button>
+                        <button onClick={handleSubmit} className="submit">✓ Add Property</button>
+                    </div>
+                </div>
+            </div>
         </>
     )
 

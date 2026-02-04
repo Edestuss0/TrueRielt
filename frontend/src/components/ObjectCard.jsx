@@ -16,61 +16,72 @@ export function ObjectCard({ item }) {
     
     return (
         <>
-            <span key={item.id}>
-                <div className="images">
+            <div className="object-card">
+                <div className="object-images">
                     {item.images.map((img, index) => (
                         <img
                             key={index}
                             src={img}
-                            alt=""
-                            style={{ width: "100px", marginRight: "5px" }}
+                            alt="Property image"
                             onClick={() => setActiveImage(img)}
                         />
                     ))}
                 </div>
-                <h1>{item.title}</h1>
-                <h2>Адрес - {item.address}</h2>
-                <h2>Цена -{item.cost}</h2>
-                <h2>Комнат - {item.rooms}</h2>
-                <h2>Общая площадь - {item.area}</h2>
-                <button onClick={handleShow}>{show === false ? 'Показать больше...' : 'Скрыть'}</button>
                 
-                <div style={{display: (show === false ?"none" : "block")}}>
-                    <h3>Район - {item.district}</h3>
-                    <h3>Жилая площадь - {item.living}</h3>
-                    <h3>Площадь кухни - {item.kitchen}</h3>
-                    <h3>Этаж - {item.floor}</h3>
-                    <h3>Этажность - {item.totalFloors}</h3>
+                <div className="object-content">
+                    <h1>{item.title}</h1>
                     
-                    <h4>{item.description}</h4>
-                </div>
-
-                {activeImage && (
-                    <div
-                        onClick={() => setActiveImage(null)}
-                        style={{
-                            position: "fixed",
-                            inset: 0,
-                            background: "rgba(0,0,0,0.8)",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            zIndex: 1000
-                        }}
-                    >
-                        <img
-                            src={activeImage}
-                            onClick={e => e.stopPropagation()}
-                            style={{
-                                maxWidth: "90%",
-                                maxHeight: "90%",
-                                borderRadius: "8px"
-                            }}
-                        />
+                    <div className="object-price">
+                        ₽{item.cost.toLocaleString()}
                     </div>
-                )}
-                
-            </span>
+                    
+                    <div className="object-info">
+                        <div className="object-info-item">
+                            <label>Address</label>
+                            <div className="value">{item.address}</div>
+                        </div>
+                        <div className="object-info-item">
+                            <label>Rooms</label>
+                            <div className="value">{item.rooms}</div>
+                        </div>
+                        <div className="object-info-item">
+                            <label>Area</label>
+                            <div className="value">{item.area} m²</div>
+                        </div>
+                        <div className="object-info-item">
+                            <label>District</label>
+                            <div className="value">{item.district}</div>
+                        </div>
+                    </div>
+                    
+                    <div className="object-actions">
+                        <button onClick={handleShow} className="secondary">
+                            {show === false ? 'Show More' : 'Hide'}
+                        </button>
+                    </div>
+                    
+                    {show && (
+                        <div className="object-details">
+                            <h3>Living Area: <span style={{color: 'var(--accent)'}}>{item.living} m²</span></h3>
+                            <h3>Kitchen Area: <span style={{color: 'var(--accent)'}}>{item.kitchen} m²</span></h3>
+                            <h3>Floor: <span style={{color: 'var(--accent)'}}>{item.floor}/{item.totalFloors}</span></h3>
+                            <h3>Phone: <span style={{color: 'var(--accent'}}>{item.phone}</span></h3>
+                            <h4>{item.description}</h4>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            {activeImage && (
+                <div className="modal-overlay" onClick={() => setActiveImage(null)}>
+                    <img
+                        src={activeImage}
+                        onClick={e => e.stopPropagation()}
+                        alt="Full size property image"
+                    />
+                </div>
+            )}
+            
         </>
     )
 }
