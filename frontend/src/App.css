@@ -5,6 +5,19 @@
   margin: 0;
 }
 
+/* Для Chrome, Safari, Edge и Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Для Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
 /* === HEADER & NAVIGATION === */
 .app-header {
   background-color: var(--bg-secondary);
@@ -166,7 +179,7 @@
 .object-images {
   width: 280px;
   min-width: 280px;
-  background-color: var(--bg-tertiary);
+  background-color: #26293b;
   display: flex;
   flex-wrap: wrap;
   gap: 0.3rem;
@@ -184,7 +197,8 @@
 }
 
 .object-images img:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
+  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.3);
 }
 
 .object-content {
@@ -226,6 +240,15 @@
   border-radius: 6px;
   border: 1px solid var(--border);
   text-align: center;
+  animation: slideIn 0.3s ease;
+}
+
+.object-info-item:hover
+{
+  border-color: var(--accent);
+  background-color: rgba(59, 130, 246, 0.05);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  animation: slideIn 0.3s ease;
 }
 
 .object-info-item label {
@@ -600,15 +623,15 @@ option {
   .content-wrapper {
     grid-template-columns: 1fr;
   }
-  
+
   .filters-panel {
     position: static;
   }
-  
+
   .toggle-filters-btn {
     display: block;
   }
-  
+
   .objects-list {
     grid-template-columns: 1fr;
   }
@@ -618,23 +641,23 @@ option {
   .main-container {
     padding: 0 1rem 1rem;
   }
-  
+
   .app-header {
     padding: 1rem;
   }
-  
+
   .objects-list {
     grid-template-columns: 1fr;
   }
-  
+
   .form-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .object-card {
     flex-direction: column;
   }
-  
+
   .object-images {
     width: 100%;
     min-width: auto;
@@ -642,20 +665,20 @@ option {
     flex-wrap: wrap;
     display: flex;
   }
-  
+
   .object-images img {
     width: calc(33.333% - 0.2rem);
     height: 100px;
   }
-  
+
   .object-content {
     padding: 1rem;
   }
-  
+
   .object-info {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .object-details {
     grid-template-columns: 1fr;
   }
