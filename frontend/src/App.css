@@ -566,6 +566,10 @@ select {
   padding-right: 2.5em;
 }
 
+option {
+  background-color: var(--bg-secondary);
+}
+
 /* === UTILITY CLASSES === */
 .text-center {
   text-align: center;
