@@ -102,7 +102,7 @@ export function AddObjectPage() {
             await resetForm();
         
         } else {
-            alert("Fill form, pidoras");
+            alert("Fill form please");
         }
         
     };
